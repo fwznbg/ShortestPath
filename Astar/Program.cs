@@ -117,15 +117,75 @@ namespace Astar
 
     public class Graph
     {
-        private List<string[]> relations;
-        private List<int[]> adjacency;
+        private Dictionary<string, string[]> adjacency;
+        // [from, to] as key, distace as value
+        private Dictionary<string[], double> relationsDictionary;
 
-        public Graph(List<string[]> relations, List<int[]> adjacency)
+        public Graph(List<string[]> relations, Dictionary<string, string[]> adjacency)
         {
-            this.relations = relations;
             this.adjacency = adjacency;
+            foreach(var rel in relations)
+            {
+                String[] k1 = { rel[0], rel[1] };
+                String[] k2 = { rel[1], rel[0] };
+                this.relationsDictionary.Add(k1, Convert.ToDouble(rel[2]));
+                this.relationsDictionary.Add(k2, Convert.ToDouble(rel[2]));
+            }
         }
+        public double G(String start, String n)
+        {
+            String from = start;
+            double cost = 0;
 
+            List<String[]> simpulHidup = new List<string[]>();
+
+            while(from != n)
+            {
+                String[] children = adjacency[from];
+                foreach (var child in children)
+                {
+                    String[] jalur = { child, from };
+                    String[] distance = { Convert.ToString(relationsDictionary[jalur]) };
+                    simpulHidup.Add(distance);
+                    // simpulHidup[simpulHidup.Count - 1][(simpulHidup[simpulHidup.Count-1]).Count] = from;
+                }
+            }
+
+            return cost;
+        }
+        public double H(String n, string goal)
+        { 
+            String from = n;
+            double heuristik = 0;
+
+            while (from != goal)
+            {
+                String[] children = adjacency[from];
+
+                String[] rel = { children[0], from };
+                double greedyBFS = relationsDictionary[rel];
+
+                foreach (var child in children)
+                {
+                    String[] relation = { child, from };
+                    double distance = relationsDictionary[relation];
+                    if (distance < greedyBFS)
+                    {
+                        greedyBFS = distance;
+                        rel = relation;
+                    }
+                }
+
+                heuristik += greedyBFS;
+                from = rel[0];
+            }
+
+            return heuristik;
+        }
+        public double F(String start, String n, String goal)
+        {
+            return G(start, n) + H(n, goal);
+        }
 
     }
 

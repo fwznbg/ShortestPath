@@ -27,7 +27,7 @@ namespace Astar
         // nodes dictionary contains node's name as key, and its coordinat
         Dictionary<string, int[]> nodesDictionary = new Dictionary<string, int[]>();
 
-        // adjacency matrix
+        // adjacency dict, contains parent as key, children as values
         Dictionary<string, string[]> adjacency = new Dictionary<string, string[]>();
 
         // open file
@@ -138,16 +138,6 @@ namespace Astar
                         }
                         lineNum++;
                     }
-
-                    foreach(KeyValuePair<string, string[]> kv in adjacency)
-                    {
-                        Debug.WriteLine("Parent {0}, Child:", kv.Key);
-                        foreach (var val in kv.Value) 
-                        {
-                            Debug.WriteLine(val); 
-                        }
-                    }
-
 
                     nodes.Sort();
                     foreach (var node in nodes)
