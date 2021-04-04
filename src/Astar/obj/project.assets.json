@@ -115,19 +115,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\fwznbg\\.nuget\\packages\\": {}
+    "C:\\Users\\hp\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ITB\\Kuliah\\Stima\\ShortestPath\\Astar\\Astar.csproj",
+      "projectUniqueName": "D:\\arsa\\kuampus\\semester_4\\Strategi Algoritma\\tucil 3\\ShortestPath\\src\\Astar\\Astar.csproj",
       "projectName": "Astar",
-      "projectPath": "D:\\ITB\\Kuliah\\Stima\\ShortestPath\\Astar\\Astar.csproj",
-      "packagesPath": "C:\\Users\\fwznbg\\.nuget\\packages\\",
-      "outputPath": "D:\\ITB\\Kuliah\\Stima\\ShortestPath\\Astar\\obj\\",
+      "projectPath": "D:\\arsa\\kuampus\\semester_4\\Strategi Algoritma\\tucil 3\\ShortestPath\\src\\Astar\\Astar.csproj",
+      "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
+      "outputPath": "D:\\arsa\\kuampus\\semester_4\\Strategi Algoritma\\tucil 3\\ShortestPath\\src\\Astar\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\fwznbg\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

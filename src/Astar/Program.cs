@@ -41,6 +41,7 @@ namespace Astar
         public void StartViewer() // set viewer.Graph to graph
         {
             viewer.Graph = graph;
+            graph.Attr.BackgroundColor = Microsoft.Msagl.Drawing.Color.Gray;
         }
         public void Start(List<string> nodes, List<string[]> relations) // starting visulizer
         {
@@ -126,10 +127,13 @@ namespace Astar
         private Dictionary<string, string[]> adjacency;
         // [from, to] as key, distace as value
         private Dictionary<Tuple<string, string>, double> relationsDictionary;
+        // nodes with its coordinate
+        private Dictionary<string, int[]> nodes;
 
-        public Graph(List<string[]> relations, Dictionary<string, string[]> adjacency)
+        public Graph(List<string[]> relations, Dictionary<string, string[]> adjacency, Dictionary<string, int[]> nodes)
         {
             this.adjacency = adjacency;
+            this.nodes = nodes;
             this.relationsDictionary = new Dictionary<Tuple<string, string>, double>();
             foreach (var rel in relations)
             {
@@ -186,36 +190,7 @@ namespace Astar
         }
         public double H(String n, string goal)
         {
-            String from = n;
-            double heuristik = 0;
-            List<string> dikunjungi = new List<string>();
-
-            while (from != goal)
-            {
-                String[] children = adjacency[from];
-
-                var rel = new Tuple<string, string>(children[0], from);
-                double greedyBFS = 0;
-                foreach (var child in children)
-                {
-                    if (!dikunjungi.Contains(child))
-                    {
-                        var relation = new Tuple<string, string>(child, from);
-                        double distance = relationsDictionary[relation];
-                        if (distance < greedyBFS || greedyBFS == 0)
-                        {
-                            greedyBFS = distance;
-                            rel = relation;
-                        }
-                    }
-                }
-
-                dikunjungi.Add(rel.Item2);
-                heuristik += greedyBFS;
-                from = rel.Item1;
-            }
-
-            return heuristik;
+            return euclideanDist(nodes[n][0], nodes[n][1], nodes[goal][0], nodes[goal][1]);
         }
         public double F(String start, String n, String goal)
         {
@@ -261,6 +236,9 @@ namespace Astar
             }
             return from.ToList<string>();
         }
+        public double euclideanDist(int x1, int y1, int x2, int y2) {
+            return Math.Sqrt(Math.Pow(x1-x2,2)+Math.Pow(y1-y2,2));
+        }
     }
 
     static class Program
@@ -271,89 +249,6 @@ namespace Astar
         [STAThread]
         static void Main()
         {
-            Dictionary<string, string[]> adjacency = new Dictionary<string, string[]>();
-            adjacency["A"] = new string[] { "Z", "S", "T" };
-            adjacency["Z"] = new string[] { "O", "A" };
-            adjacency["S"] = new string[] { "O", "F", "R", "A" };
-            adjacency["T"] = new string[] { "A", "L" };
-            adjacency["O"] = new string[] { "Z", "S" };
-            adjacency["F"] = new string[] { "B", "S" };
-            adjacency["R"] = new string[] { "S", "C", "P" };
-            adjacency["L"] = new string[] { "M", "T" };
-            adjacency["M"] = new string[] { "D", "L" };
-            adjacency["C"] = new string[] { "P", "R", "D" };
-            adjacency["P"] = new string[] { "C", "B", "R" };
-            adjacency["B"] = new string[] { "U", "F", "G", "P" };
-            adjacency["D"] = new string[] { "M", "C" };
-            adjacency["G"] = new string[] { "B" };
-            adjacency["U"] = new string[] { "B", "H", "V" };
-            adjacency["H"] = new string[] { "U", "E" };
-            adjacency["E"] = new string[] { "H" };
-            adjacency["V"] = new string[] { "U", "I" };
-            adjacency["I"] = new string[] { "V", "N" };
-            adjacency["N"] = new string[] { "I" };
-
-            List<string[]> relations = new List<string[]> { };
-            relations.Add(new string[] { "A", "Z", "75" });
-            relations.Add(new string[] { "Z", "A", "75" });
-            relations.Add(new string[] { "O", "Z", "71" });
-            relations.Add(new string[] { "Z", "O", "71" });
-            relations.Add(new string[] { "S", "O", "151" });
-            relations.Add(new string[] { "O", "S", "151" });
-            relations.Add(new string[] { "A", "S", "140" });
-            relations.Add(new string[] { "S", "A", "140" });
-            relations.Add(new string[] { "S", "R", "80" });
-            relations.Add(new string[] { "R", "S", "80" });
-            relations.Add(new string[] { "S", "F", "99" });
-            relations.Add(new string[] { "F", "S", "99" });
-            relations.Add(new string[] { "F", "B", "211" });
-            relations.Add(new string[] { "B", "F", "211" });
-            relations.Add(new string[] { "P", "B", "101" });
-            relations.Add(new string[] { "B", "P", "101" });
-            relations.Add(new string[] { "P", "R", "97" });
-            relations.Add(new string[] { "R", "P", "97" });
-            relations.Add(new string[] { "P", "C", "138" });
-            relations.Add(new string[] { "C", "P", "138" });
-            relations.Add(new string[] { "C", "R", "146" });
-            relations.Add(new string[] { "R", "C", "146" });
-            relations.Add(new string[] { "D", "C", "120" });
-            relations.Add(new string[] { "C", "D", "120" });
-            relations.Add(new string[] { "M", "D", "75" });
-            relations.Add(new string[] { "D", "M", "75" });
-            relations.Add(new string[] { "M", "L", "70" });
-            relations.Add(new string[] { "L", "M", "70" });
-            relations.Add(new string[] { "T", "L", "111" });
-            relations.Add(new string[] { "L", "T", "111" });
-            relations.Add(new string[] { "A", "T", "118" });
-            relations.Add(new string[] { "T", "A", "118" });
-            relations.Add(new string[] { "U", "B", "85" });
-            relations.Add(new string[] { "B", "U", "85" });
-            relations.Add(new string[] { "B", "G", "90" });
-            relations.Add(new string[] { "G", "B", "90" });
-            relations.Add(new string[] { "U", "H", "98" });
-            relations.Add(new string[] { "H", "U", "98" });
-            relations.Add(new string[] { "E", "H", "86" });
-            relations.Add(new string[] { "H", "E", "86" });
-            relations.Add(new string[] { "U", "V", "142" });
-            relations.Add(new string[] { "V", "U", "142" });
-            relations.Add(new string[] { "I", "V", "92" });
-            relations.Add(new string[] { "V", "I", "92" });
-            relations.Add(new string[] { "N", "I", "87" });
-            relations.Add(new string[] { "I", "N", "87" });
-
-            Graph g = new Graph(relations, adjacency);
-
-            List<string> ucs = g.Astar("A", "B");
-            foreach (var x in ucs)
-            {
-                Debug.WriteLine(x);
-            }
-
-            //double x = g.G("A", "B");
-            //Debug.WriteLine(x);
-
-            //Debug.WriteLine("Succes");
-
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

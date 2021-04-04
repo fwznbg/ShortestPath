@@ -150,7 +150,7 @@ namespace Astar
                     // display filename
                     filename.Text = Path.GetFileName(openFile.FileName);
 
-                    g = new Graph(relations, adjacency);
+                    g = new Graph(relations, adjacency, nodesDictionary);
 
                     v.Initialize(graphVis);
 
@@ -193,10 +193,10 @@ namespace Astar
 
         private void todropdown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //string start = fromdropdown.SelectedItem.ToString();
-            //string goal = todropdown.SelectedItem.ToString();
-            //List<string> path = g.Astar(start, goal);
-            //v.VisualizePath(nodes, relations, path);
+            string start = fromdropdown.SelectedItem.ToString();
+            string goal = todropdown.SelectedItem.ToString();
+            List<string> path = g.Astar(start, goal);
+            v.VisualizePath(nodes, relations, path);
         }
     }
 }
