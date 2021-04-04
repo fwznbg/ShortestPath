@@ -78,7 +78,7 @@ namespace Astar
         public void VisualizePath(List<string> nodes, List<string[]> relations, List<string> Path) // visualize path on graph
         {
             ClearScreen(nodes);   // clear screen before visualize
-            
+
             Microsoft.Msagl.Drawing.Label.DefaultFontSize = 4;
 
             // add every relations to graph
@@ -131,7 +131,7 @@ namespace Astar
         {
             this.adjacency = adjacency;
             this.relationsDictionary = new Dictionary<Tuple<string, string>, double>();
-            foreach(var rel in relations)
+            foreach (var rel in relations)
             {
                 var k1 = new Tuple<string, string>(rel[0], rel[1]);
                 var k2 = new Tuple<string, string>(rel[1], rel[0]);
@@ -139,70 +139,13 @@ namespace Astar
                 if (!relationsDictionary.ContainsKey(k2)) this.relationsDictionary.Add(k2, Convert.ToDouble(rel[2]));
             }
         }
-        //public double G(String start, String n)
-        //{
-        //    String[] from = { start };
-        //    double cost = 0;
-
-        //    List<List<String>> simpulHidup = new List<List<String>>();
-        //    List<string> dikunjungi = new List<string>();
-
-        //    String[] children = adjacency[from[from.Count() - 1]];
-        //    foreach (var child in children)
-        //    {
-        //        var jalur = new Tuple<string, string>(child, from[from.Count() - 1]);
-        //        String distance = Convert.ToString(relationsDictionary[jalur]);
-        //        simpulHidup.Add(new List<string> { distance });
-        //        simpulHidup[simpulHidup.Count - 1].Add(from[from.Count() - 1]);
-        //        simpulHidup[simpulHidup.Count - 1].Add(child);
-
-        //    }
-
-        //    dikunjungi.Add(from[from.Count() - 1]);
-
-        //    while (from[from.Count() - 1] != n)
-        //    {
-        //        double minDistance = 0;
-        //        var simpulMati = simpulHidup[0];
-        //        foreach (var node in simpulHidup)
-        //        {
-        //            double dist = Convert.ToDouble(node[0]);
-        //            if (dist < minDistance || minDistance == 0)
-        //            {
-        //                minDistance = dist;
-        //                from = node.ToArray();
-        //                simpulMati = node;
-        //            }
-        //        }
-
-        //        simpulHidup.Remove(simpulMati);
-
-        //        children = adjacency[from[from.Count() - 1]];
-        //        foreach (var child in children)
-        //        {
-        //            if (!dikunjungi.Contains(child))
-        //            {
-        //                var jalur = new Tuple<string, string>(child, from[from.Count() - 1]);
-        //                String distance = Convert.ToString(relationsDictionary[jalur] + minDistance);
-        //                simpulHidup.Add(from.ToList<string>());
-        //                simpulHidup[simpulHidup.Count - 1][0] = distance;
-        //                simpulHidup[simpulHidup.Count - 1].Add(child);
-        //            }
-        //        }
-
-        //        dikunjungi.Add(from[from.Count() - 1]);
-        //    }
-
-        //    cost = Convert.ToDouble(from[0]);
-        //    return cost;
-        //}
         public double G(String start, String n)
         {
             String[] from = { "0", start };
             double cost = 0;
             List<List<String>> simpulHidup = new List<List<String>>();
             List<string> dikunjungi = new List<string>();
-            double minDistance = 0;
+            double distanceAtoN = 0;
 
             while (from[from.Count() - 1] != n)
             {
@@ -214,7 +157,7 @@ namespace Astar
                     if (!dikunjungi.Contains(child))
                     {
                         var jalur = new Tuple<string, string>(child, from[from.Count() - 1]);
-                        String distance = Convert.ToString(relationsDictionary[jalur] + minDistance);
+                        String distance = Convert.ToString(relationsDictionary[jalur] + distanceAtoN);
                         simpulHidup.Add(from.ToList<string>());
                         simpulHidup[simpulHidup.Count - 1][0] = distance;
                         simpulHidup[simpulHidup.Count - 1].Add(child);
@@ -222,6 +165,7 @@ namespace Astar
                 }
 
                 var simpulMati = simpulHidup[0];
+                double minDistance = 0;
 
                 foreach (var node in simpulHidup)
                 {
@@ -229,11 +173,11 @@ namespace Astar
                     if (dist < minDistance || minDistance == 0)
                     {
                         minDistance = dist;
+                        distanceAtoN = dist;
                         from = node.ToArray();
                         simpulMati = node;
                     }
                 }
-                Debug.WriteLine(from[0]);
                 simpulHidup.Remove(simpulMati);
             }
 
@@ -241,7 +185,7 @@ namespace Astar
             return cost;
         }
         public double H(String n, string goal)
-        { 
+        {
             String from = n;
             double heuristik = 0;
             List<string> dikunjungi = new List<string>();
@@ -265,7 +209,7 @@ namespace Astar
                         }
                     }
                 }
-                
+
                 dikunjungi.Add(rel.Item2);
                 heuristik += greedyBFS;
                 from = rel.Item1;
@@ -284,11 +228,11 @@ namespace Astar
             List<List<String>> simpulHidup = new List<List<String>>();
 
 
-            while (from[from.Count()-1] != goal)
+            while (from[from.Count() - 1] != goal)
             {
                 dikunjungi.Add(from[from.Count() - 1]);
                 String[] children = adjacency[from[from.Count() - 1]];
-                foreach(var child in children)
+                foreach (var child in children)
                 {
                     if (!dikunjungi.Contains(child))
                     {
@@ -299,13 +243,13 @@ namespace Astar
                     }
                 }
 
-                double bobotMin = 0;
+                double bobotMin = Convert.ToDouble(simpulHidup[0][0]);
                 var simpulMati = simpulHidup[0];
 
-                foreach(var node in simpulHidup)
+                foreach (var node in simpulHidup)
                 {
                     double dist = Convert.ToDouble(node[0]);
-                    if (dist < bobotMin || bobotMin == 0)
+                    if (dist < bobotMin)
                     {
                         bobotMin = dist;
                         from = node.ToArray();
@@ -341,13 +285,13 @@ namespace Astar
             adjacency["P"] = new string[] { "C", "B", "R" };
             adjacency["B"] = new string[] { "U", "F", "G", "P" };
             adjacency["D"] = new string[] { "M", "C" };
-            adjacency["G"] = new string[] { "B"};
+            adjacency["G"] = new string[] { "B" };
             adjacency["U"] = new string[] { "B", "H", "V" };
             adjacency["H"] = new string[] { "U", "E" };
-            adjacency["E"] = new string[] { "H"};
+            adjacency["E"] = new string[] { "H" };
             adjacency["V"] = new string[] { "U", "I" };
             adjacency["I"] = new string[] { "V", "N" };
-            adjacency["N"] = new string[] { "I"};
+            adjacency["N"] = new string[] { "I" };
 
             List<string[]> relations = new List<string[]> { };
             relations.Add(new string[] { "A", "Z", "75" });
@@ -399,21 +343,21 @@ namespace Astar
 
             Graph g = new Graph(relations, adjacency);
 
-            //List<string> ucs = g.Astar("A", "B");
-            //foreach (var x in ucs)
-            //{
-            //    Debug.WriteLine(x);
-            //}
+            List<string> ucs = g.Astar("A", "B");
+            foreach (var x in ucs)
+            {
+                Debug.WriteLine(x);
+            }
 
-            double x = g.G("A", "B");
-            Debug.WriteLine(x);
+            //double x = g.G("A", "B");
+            //Debug.WriteLine(x);
 
-            Debug.WriteLine("Succes");
+            //Debug.WriteLine("Succes");
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1()); 
+            Application.Run(new Form1());
         }
     }
 }
