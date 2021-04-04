@@ -36,6 +36,8 @@ namespace Astar
         //visualizer
         Visualizer v = new Visualizer();
 
+        Graph g;
+
         public Form1()
         {
             InitializeComponent();
@@ -74,7 +76,7 @@ namespace Astar
                             {
                                 nRelations = Convert.ToInt32(line);
 
-                                Debug.WriteLine("Banyak relasi {0}", nRelations);
+                                // Debug.WriteLine("Banyak relasi {0}", nRelations);
                             }
                             else if(lineNum <= nRelations)
                             {
@@ -87,8 +89,8 @@ namespace Astar
                                 nodesDictionary.Add(splitLine[2], koordinat);
                                 nodes.Add(splitLine[2]);
 
-                                Debug.WriteLine("Node ke {0}: {1}", lineNum, nodes[lineNum-1]);
-                                Debug.WriteLine("Node Directory key {0}, koordinat({1}, {2})", nodesDictionary.Keys.ElementAt(lineNum - 1), nodesDictionary.Values.ElementAt(lineNum-1)[0], nodesDictionary.Values.ElementAt(lineNum - 1)[1]);
+                                // Debug.WriteLine("Node ke {0}: {1}", lineNum, nodes[lineNum-1]);
+                                // Debug.WriteLine("Node Directory key {0}, koordinat({1}, {2})", nodesDictionary.Keys.ElementAt(lineNum - 1), nodesDictionary.Values.ElementAt(lineNum-1)[0], nodesDictionary.Values.ElementAt(lineNum - 1)[1]);
 
                             }
                             else    // adjacency 
@@ -97,13 +99,13 @@ namespace Astar
                                 splitLine = line.Split(' ');
                                 
                                 int idxFrom = lineNum - 1 - nRelations;
-                                Debug.WriteLine("line ke {0}", lineNum-nRelations);
+                                // Debug.WriteLine("line ke {0}", lineNum-nRelations);
 
                                 List<String> child = new List<String>();
 
                                 for (int i = 0; i<nRelations; i++)
                                 {
-                                    Debug.WriteLine(i);
+                                    // Debug.WriteLine(i);
                                     int currentValue = Convert.ToInt32(splitLine[i]);
 
                                     if ((i<= lineNum - nRelations - 1) && currentValue == 1)
@@ -119,11 +121,11 @@ namespace Astar
 
                                         fromTo[2] = Convert.ToString(Math.Round(distance, 2));
 
-                                        Debug.WriteLine("idx from {0}", idxFrom);
-                                        Debug.WriteLine("idx to {0}", idxTo);
+                                        // Debug.WriteLine("idx from {0}", idxFrom);
+                                        // Debug.WriteLine("idx to {0}", idxTo);
                                          
                                         relations.Add(fromTo);
-                                        Debug.WriteLine("Relation from {0} to {1}. jaraknya {2}", relations[relations.Count-1][0], relations[relations.Count - 1][1], relations[relations.Count - 1][2]);
+                                        // Debug.WriteLine("Relation from {0} to {1}. jaraknya {2}", relations[relations.Count-1][0], relations[relations.Count - 1][1], relations[relations.Count - 1][2]);
                                     }
                                     
                                     if (currentValue == 1)
@@ -148,9 +150,7 @@ namespace Astar
                     // display filename
                     filename.Text = Path.GetFileName(openFile.FileName);
 
-                    //var a = nodes.SelectedItem;
-                    //g = new Graph(nRelations);
-                    //g.fromRead(nodes, relations);
+                    g = new Graph(relations, adjacency);
 
                     v.Initialize(graphVis);
 
@@ -189,6 +189,14 @@ namespace Astar
                 if (item.ToString() == from) continue;
                 todropdown.Items.Add(item);
             }
+        }
+
+        private void todropdown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string start = fromdropdown.SelectedItem.ToString();
+            string goal = todropdown.SelectedItem.ToString();
+            List<string> path = g.Astar(start, goal);
+            v.VisualizePath(nodes, relations, path);
         }
     }
 }

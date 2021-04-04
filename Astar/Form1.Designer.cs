@@ -113,6 +113,7 @@ namespace Astar
             this.todropdown.Name = "todropdown";
             this.todropdown.Size = new System.Drawing.Size(151, 28);
             this.todropdown.TabIndex = 5;
+            this.todropdown.SelectedIndexChanged += new System.EventHandler(this.todropdown_SelectedIndexChanged);
             // 
             // panel1
             // 
