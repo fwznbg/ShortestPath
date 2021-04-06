@@ -25,7 +25,7 @@ namespace Astar
         List<string> nodes = new List<string>();
 
         // nodes dictionary contains node's name as key, and its coordinat
-        Dictionary<string, int[]> nodesDictionary = new Dictionary<string, int[]>();
+        Dictionary<string, Double[]> nodesDictionary = new Dictionary<string, Double[]>();
 
         // adjacency dict, contains parent as key, children as values
         Dictionary<string, string[]> adjacency = new Dictionary<string, string[]>();
@@ -84,7 +84,7 @@ namespace Astar
                                 String[] splitLine = new String[3];
                                 // split every line read
                                 splitLine = line.Split(' ');
-                                int[] koordinat = { Convert.ToInt32(splitLine[0]), Convert.ToInt32(splitLine[1]) };
+                                Double[] koordinat = { Convert.ToDouble(splitLine[0]), Convert.ToDouble(splitLine[1]) };
 
                                 nodesDictionary.Add(splitLine[2], koordinat);
                                 nodes.Add(splitLine[2]);
@@ -119,7 +119,7 @@ namespace Astar
 
                                         double distance = Math.Sqrt(Math.Pow(absis, 2.00) + Math.Pow(ordinat, 2.00));
 
-                                        fromTo[2] = Convert.ToString(Math.Round(distance, 2));
+                                        fromTo[2] = Convert.ToString(distance);
 
                                         // Debug.WriteLine("idx from {0}", idxFrom);
                                         // Debug.WriteLine("idx to {0}", idxTo);

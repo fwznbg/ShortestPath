@@ -128,9 +128,9 @@ namespace Astar
         // [from, to] as key, distace as value
         private Dictionary<Tuple<string, string>, double> relationsDictionary;
         // nodes with its coordinate
-        private Dictionary<string, int[]> nodes;
+        private Dictionary<string, Double[]> nodes;
 
-        public Graph(List<string[]> relations, Dictionary<string, string[]> adjacency, Dictionary<string, int[]> nodes)
+        public Graph(List<string[]> relations, Dictionary<string, string[]> adjacency, Dictionary<string, Double[]> nodes)
         {
             this.adjacency = adjacency;
             this.nodes = nodes;
@@ -236,7 +236,7 @@ namespace Astar
             }
             return from.ToList<string>();
         }
-        public double euclideanDist(int x1, int y1, int x2, int y2) {
+        public double euclideanDist(Double x1, Double y1, Double x2, Double y2) {
             return Math.Sqrt(Math.Pow(x1-x2,2)+Math.Pow(y1-y2,2));
         }
     }
