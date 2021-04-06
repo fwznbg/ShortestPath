@@ -1,0 +1,19 @@
+9
+CitraLand
+KHAhmadDahlan
+AhmadYani
+Pleburan
+TulisanS5
+Polrestabes
+Pandanaran
+Gajahmada
+SimpangLima
+0 1 0 0 0 0 0 1 1
+1 0 1 0 0 0 0 0 1
+0 1 0 1 0 0 0 0 1
+0 0 1 0 1 0 0 0 1
+0 0 0 1 0 1 0 0 1
+0 0 0 0 1 0 1 0 1
+0 0 0 0 0 1 0 1 1
+1 0 0 0 0 0 1 0 1
+1 1 1 1 1 1 1 1 0

@@ -1,0 +1,17 @@
+8
+12 45 MetroIndahMall
+12 52 Dispusipda
+1 74 TamanPersada
+32 23 WarnetAradiw
+12 56 BrimobMargocinta
+54 84 DSC
+12 53 Disnaker
+23 63 MandiriUniversity
+0 0 1 0 1 0 1 0
+0 0 0 1 1 0 0 1
+1 0 0 1 0 0 0 0
+0 1 1 0 0 1 1 0
+1 1 0 0 0 1 0 1
+0 0 0 1 1 0 1 0 
+1 0 0 1 0 1 0 0
+0 1 0 0 1 0 0 0
