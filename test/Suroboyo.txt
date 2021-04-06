@@ -1,0 +1,23 @@
+11
+5 12 Wiyung
+7 43 Kebraon
+5 32 Kedurus
+27 6 Pacar
+35 2 KusumaBangsa
+44 10 Ondomohen
+69 9 Ketintang
+73 42 Keputih
+24 42 Kenjeran
+21 12 Dharmawangsa
+2 12 Gubeng
+0 1 0 0 1 1 0 0 0 0 0
+1 0 1 0 0 0 0 0 0 0 0
+0 1 0 1 0 0 0 0 0 0 0
+0 0 1 0 1 0 0 0 0 0 0
+1 0 0 1 0 0 0 0 0 1 0
+1 0 0 0 0 0 1 0 1 0 0
+0 0 0 0 0 1 0 1 0 0 0
+0 0 0 0 0 0 1 0 1 0 0
+0 0 0 0 0 1 0 1 0 1 0
+0 0 0 0 0 0 0 0 1 0 1
+0 0 0 1 0 0 0 0 0 1 0

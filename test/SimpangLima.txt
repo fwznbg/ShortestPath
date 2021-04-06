@@ -1,13 +1,13 @@
 9
-CitraLand
-KHAhmadDahlan
-AhmadYani
-Pleburan
-TulisanS5
-Polrestabes
-Pandanaran
-Gajahmada
-SimpangLima
+8 9 CitraLand
+10 12 KHAhmadDahlan
+1 6 AhmadYani
+5.2 9.3 Pleburan
+7.78 90 TulisanS5
+9 3.26 Polrestabes
+4.12 5.21 Pandanaran
+422 12 Gajahmada
+5.21 3 SimpangLima
 0 1 0 0 0 0 0 1 1
 1 0 1 0 0 0 0 0 1
 0 1 0 1 0 0 0 0 1
