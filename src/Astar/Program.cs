@@ -237,6 +237,10 @@ namespace Astar
 
                 simpulHidup.Remove(simpulMati);
             }
+            if (from[from.Count() - 1] != goal) {
+                String[] toReturn = { "0", start };
+                return toReturn.ToList<string>();
+            }
             return from.ToList<string>();
         }
         public double euclideanDist(Double x1, Double y1, Double x2, Double y2) {
