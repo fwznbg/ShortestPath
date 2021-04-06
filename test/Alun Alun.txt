@@ -1,0 +1,17 @@
+8
+1 2 JendSudirman
+32 13 TuguAsiaAfrika
+84 54 MusemAsiaAfrika
+12 100 Homan
+22 74 AsiaAfrikaTimur
+74 52 AlunAlunBandung
+53 23 MasjidRayaBandung
+53 86 TokoTerpalLoteng
+0 1 0 0 0 0 0 1
+1 0 1 0 1 1 0 0
+0 1 0 1 0 0 0 0
+0 0 1 0 1 0 0 0
+0 1 0 1 0 1 0 1
+0 1 0 0 1 0 1 0 
+0 0 0 0 0 1 0 0
+1 0 0 0 1 0 0 0

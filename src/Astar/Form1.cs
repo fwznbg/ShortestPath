@@ -150,7 +150,7 @@ namespace Astar
                     }
 
                     // display filename
-                    filename.Text = Path.GetFileName(openFile.FileName);
+                    label3.Text = Path.GetFileName(openFile.FileName);
 
                     g = new Graph(relations, adjacency, nodesDictionary);
 
@@ -199,6 +199,13 @@ namespace Astar
             string goal = todropdown.SelectedItem.ToString();
             List<string> path = g.Astar(start, goal);
             v.VisualizePath(nodes, relations, path);
+            jaraktempuh.Text = path[0] + " M.";
+            String teks = String.Join("→", path.Skip(1));
+            richTextBox1.Text = teks;
+            using (Graphics g = CreateGraphics())
+            {
+                richTextBox1.Height = (int)g.MeasureString(richTextBox1.Text, richTextBox1.Font, richTextBox1.Width).Height + 5;
+            }
         }
     }
 }
