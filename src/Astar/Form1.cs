@@ -61,6 +61,8 @@ namespace Astar
                     }
 
                     nodes.Clear();
+                    adjacency.Clear();
+                    nodesDictionary.Clear();
                     relations.Clear();
                     fromdropdown.Items.Clear();
 

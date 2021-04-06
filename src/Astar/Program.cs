@@ -170,6 +170,8 @@ namespace Astar
 
                 var simpulMati = simpulHidup[0];
                 double minDistance = 0;
+                from = simpulMati.ToArray();
+                distanceAtoN = Convert.ToDouble(simpulMati[0]);
 
                 foreach (var node in simpulHidup)
                 {
@@ -220,6 +222,7 @@ namespace Astar
 
                 double bobotMin = Convert.ToDouble(simpulHidup[0][0]);
                 var simpulMati = simpulHidup[0];
+                from = simpulMati.ToArray();
 
                 foreach (var node in simpulHidup)
                 {
