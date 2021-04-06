@@ -151,7 +151,7 @@ namespace Astar
             List<string> dikunjungi = new List<string>();
             double distanceAtoN = 0;
 
-            while (from[from.Count() - 1] != n)
+            while (from[from.Count() - 1] != n && (simpulHidup.Any() || !dikunjungi.Any()))
             {
                 dikunjungi.Add(from[from.Count() - 1]);
 
@@ -203,7 +203,7 @@ namespace Astar
             List<List<String>> simpulHidup = new List<List<String>>();
 
 
-            while (from[from.Count() - 1] != goal)
+            while (from[from.Count() - 1] != goal && (simpulHidup.Any() || !dikunjungi.Any()))
             {
                 dikunjungi.Add(from[from.Count() - 1]);
                 String[] children = adjacency[from[from.Count() - 1]];
