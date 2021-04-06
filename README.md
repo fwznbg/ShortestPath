@@ -10,5 +10,5 @@ Program mencari lintasan terpendek menggunakan alogoritma A* ditulis dengan baha
 5. Hasil akan ditampilkan
 
 ### Author
-Arsa Daris Gintara - 13519037
+Arsa Daris Gintara - 13519037 <br>
 Muhammad Fawwaz Naabigh - 13519206
