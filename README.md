@@ -1,6 +1,6 @@
 ## Tucil 3
 ### What?
-Program mencari terpendek menggunakan alogoritma A* ditulis dengan bahasa C#
+Program mencari lintasan terpendek menggunakan alogoritma A* ditulis dengan bahasa C#
 
 ## How?
 1. Buka Astar.exe pada folder bin
